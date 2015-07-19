@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace star2._2
 {
-    public partial class Form1 : Form
+    public partial class main_form : Form
     {
         private Random rand;
         private int i, j;
@@ -21,11 +21,13 @@ namespace star2._2
         private Star[] M32;
         private Transformation T;
         private Graphics screen;
-        public Form1()
+        public main_form()
         {
             InitializeComponent();
             ////
-            screen = pictureBox1.CreateGraphics();
+            timer.Interval = 1;
+            ////
+            screen = picbox.CreateGraphics();
             screen.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighSpeed;
             screen.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighSpeed;
             screen.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
@@ -65,15 +67,24 @@ namespace star2._2
             T = new Transformation(x, y, z);
         }
         
-        private void button1_Click(object sender, EventArgs e)
+        private void start_btn_Click(object sender, EventArgs e)
         {
-            timer1.Interval = 1;
-            timer1.Enabled = true;
-            timer1.Start();
+            if(timer.Enabled)
+            {
+                start_btn.Text = "Start";
+                timer.Enabled = false;
+                timer.Stop();
+            }
+            else
+            {
+                start_btn.Text = "Stop";
+                timer.Enabled = true;
+                timer.Start();
+            }
 
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
 		    ///////////
 		    for(i=0;i<M32Size;i++)
@@ -144,7 +155,7 @@ namespace star2._2
 		    T.setPsitionOfDist(0,0,0);
         }
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        private void main_form_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode==Keys.D)
             {
@@ -172,7 +183,7 @@ namespace star2._2
             }
         }
 
-        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        private void main_form_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.D)
             {
