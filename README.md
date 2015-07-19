@@ -1,1 +1,1 @@
-3D simulation of iterstelar gavity with graphic user interface 
+3D simulation of iterstelar gavity with graphic user interface in C#
